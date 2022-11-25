@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import   { AuthContext } from '../../Contects/UserContexts';
 
 const Navbar = () => {
+    const {user} =useContext(AuthContext)
+    console.log(user)
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -21,7 +24,7 @@ const Navbar = () => {
                             </li>
                             <li>Item 3</li>
                         </ul>
-                        
+
                     </div>
                     <div className="btn btn-ghost normal-case text-xl">daisyUI</div>
                 </div>
@@ -39,8 +42,12 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    {
+                        user?.displayName && <p>{user.displayName}</p>
+                    }
+                    <Link to={'/login'}> <div className="btn btn-outline btn-primary">Login</div></Link>
 
-                    <Link to={'/login'}> <div className="btn btn-outline btn-primary">Register</div></Link>
+                    <Link to={'/register'}> <div className="btn btn-outline btn-primary mx-2">Register</div></Link>
                 </div>
             </div>
 
