@@ -1,10 +1,15 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import   { AuthContext } from '../../Contects/UserContexts';
+import { AuthContext } from '../../Contects/UserContexts';
 
 const Navbar = () => {
-    const {user} =useContext(AuthContext)
-    console.log(user)
+    const { user, logOut } = useContext(AuthContext)
+
+    const hndaleLogout = () => {
+        logOut()
+            .then(() => { })
+            .catch(err => console.log(err))
+    }
     return (
         <div>
             <div className="navbar bg-base-100">
@@ -43,11 +48,13 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user?.displayName && <p>{user.displayName}</p>
-                    }
-                    <Link to={'/login'}> <div className="btn btn-outline btn-primary">Login</div></Link>
+                        user?.uid ? <> <div className="w-10 rounded-full">
+                            <img src={user?.photoURL} alt="" />
+                        </div><p>{user?.displayName}</p> <div className="btn btn-outline btn-primary mx-2" onClick={hndaleLogout}>Log Out</div></> : <><Link to={'/login'}> <div className="btn btn-outline btn-primary">Login</div></Link>
 
-                    <Link to={'/register'}> <div className="btn btn-outline btn-primary mx-2">Register</div></Link>
+                            <Link to={'/register'}> <div className="btn btn-outline btn-primary mx-2">Register</div></Link></>
+                    }
+
                 </div>
             </div>
 
