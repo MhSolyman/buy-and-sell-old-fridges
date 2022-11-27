@@ -4,7 +4,7 @@ import useSeller from '../../../Hooks/useSeller';
 
 import { AuthContext } from '../../../Pages/Contects/UserContexts';
 
-const PrivateRoutes = ({children}) => {
+const SellerRoutes = ({children}) => {
     const {user,loading} = useContext(AuthContext);
     const location =useLocation();
     
@@ -20,7 +20,7 @@ console.log(user)
     if(loading  || isusers){
         return <p>Loading ....................</p>
     }
-    if (user?.uid && users && users?.userType ){
+    if (user?.uid && users && users?.userType==="seller" ){
         return children
 
     }
@@ -29,4 +29,4 @@ console.log(user)
     return <Navigate to ='/login' state={{from:location}} replace></Navigate>
 };
 
-export default PrivateRoutes;
+export default SellerRoutes;

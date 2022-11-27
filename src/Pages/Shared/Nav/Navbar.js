@@ -5,8 +5,8 @@ import { AuthContext } from '../../Contects/UserContexts';
 const Navbar = () => {
 
 
-    const [users, setUsers] = useState(null)
-    console.log(users)
+    const [users, setUsers] = useState('')
+
     const { user, logOut } = useContext(AuthContext)
     //   const { data: users = {} } = useQuery({
     //     queryKey: ['users'],
@@ -76,8 +76,28 @@ const Navbar = () => {
                             <Link to={'/register'}> <div className="btn btn-outline btn-primary mx-2">Register</div></Link></>
                     }
                     {
-                        users?.userType==="buyer" && user?.uid ? <p>{users?.userType}</p> : <> </>
+                        users?.userType === "buyer" && user?.uid ? <Link to={'/Myorder'}><button className="btn btn-ghost">My orders</button></Link> : <> </>
                     }
+                    {
+                        users?.userType === "seller" && user?.uid ? <Link to={'/Addproduct'}><button className="btn btn-ghost">Add A product</button></Link> : <> </>
+                    }
+                    {
+                        users?.userType === "seller" && user?.uid ? <Link to={'/MyProducts'}><button className="btn btn-ghost"> My Products</button></Link> : <> </>
+                    }
+                    {
+                        users?.userType === "seller" && user?.uid ? <Link to={'/Mybuyers'}><button className="btn btn-ghost"> My Buyers</button></Link> : <> </>
+                    }
+                    {
+                        users?.userType === "admin" && user?.uid ? <Link to={'/allSellers'}><button className="btn btn-ghost"> All Sellers</button></Link> : <> </>
+                    }
+                    {
+                        users?.userType === "admin" && user?.uid ? <Link to={'/allbuyers'}><button className="btn btn-ghost">  All Buyers </button></Link> : <> </>
+                    }
+                    {
+                        users?.userType === "admin" && user?.uid ? <Link to={'/reporteditems'}><button className="btn btn-ghost">  Reported Items</button></Link> : <> </>
+                    }
+
+
 
                 </div>
             </div>
