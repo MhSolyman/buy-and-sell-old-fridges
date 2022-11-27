@@ -5,7 +5,8 @@ import { AuthContext } from '../Contects/UserContexts';
 const Register = () => {
   
 
-    const [utype, setUtype] = useState()
+    const [utype, setUtype] = useState('buyer');
+    console.log(utype)
     const { updateUserProfile, createUser, signInWithGoogle, } = useContext(AuthContext)
  
 
@@ -130,7 +131,7 @@ const Register = () => {
 
                             <select onChange={e => setUtype(e.target.value)}>
                              
-                                <option value="buyer">buyer</option>
+                                <option value={null}>buyer</option>
                                 <option value="seller">seller</option>
 
                             </select>

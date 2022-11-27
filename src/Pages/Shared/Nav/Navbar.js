@@ -1,9 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contects/UserContexts';
 
 const Navbar = () => {
+
+
+    const [users, setUsers] = useState(null)
+    console.log(users)
     const { user, logOut } = useContext(AuthContext)
+    //   const { data: users = {} } = useQuery({
+    //     queryKey: ['users'],
+    //   queryFn: async () => {
+    //     const res = await fetch(`http://localhost:5000/users/${user?.email}`);
+    //   const data = await res.json();
+    // return data;
+    //}
+
+    //})
+
+    useEffect(() => {
+
+        fetch(`http://localhost:5000/users/${user?.email}`)
+            .then((response) => response.json())
+            .then((data) => setUsers(data));
+    }, [user?.email]);
+
 
     const hndaleLogout = () => {
         logOut()
@@ -48,11 +69,14 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user?.uid ? <> <div className="w-10 rounded-full">
+                        user?.uid && users?.userType ? <> <div className="w-10 rounded-full">
                             <img src={user?.photoURL} alt="" />
                         </div><p>{user?.displayName}</p> <div className="btn btn-outline btn-primary mx-2" onClick={hndaleLogout}>Log Out</div></> : <><Link to={'/login'}> <div className="btn btn-outline btn-primary">Login</div></Link>
 
                             <Link to={'/register'}> <div className="btn btn-outline btn-primary mx-2">Register</div></Link></>
+                    }
+                    {
+                        users?.userType==="buyer" && user?.uid ? <p>{users?.userType}</p> : <> </>
                     }
 
                 </div>
