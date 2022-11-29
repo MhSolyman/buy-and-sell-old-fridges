@@ -16,6 +16,7 @@ import MyProducts from "../../Pages/Sellers/MyProducts/MyProducts";
 import SellerRoutes from "./Seller/SellerRoutes";
 import BuyerRoutes from "./Buyer/BuyerRoutes";
 import PrivateRoutes from "./Private/PrivateRoutes";
+import AdminRoutes from "./Admin/AdminRoutes";
 
 const router = createBrowserRouter([
     {
@@ -42,16 +43,16 @@ const router = createBrowserRouter([
         },
         {
             path: '/reporteditems',
-            element: <ReportedItems></ReportedItems>
+            element: <AdminRoutes><ReportedItems></ReportedItems></AdminRoutes>
         },
         {
             path: '/allSellers',
-            element: <AllSellers></AllSellers>
+            element: <AdminRoutes><AllSellers></AllSellers></AdminRoutes>
         }
             ,
         {
             path: '/allbuyers',
-            element: <BuyersList></BuyersList>
+            element: <AdminRoutes><BuyersList></BuyersList></AdminRoutes>
         },
         {
             path: '/MyProducts',

@@ -7,7 +7,7 @@ const Register = () => {
 
     const [utype, setUtype] = useState('buyer');
     console.log(utype)
-    const { updateUserProfile, createUser, signInWithGoogle, } = useContext(AuthContext)
+    const { updateUserProfile, createUser, signInWithGoogle,user } = useContext(AuthContext)
  
 
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ const Register = () => {
 
 
 
-        createUser(email, password)
+        createUser(email, password,user)
             .then(result => {
                 const user = result.user;
                 console.log(user)
@@ -41,6 +41,7 @@ const Register = () => {
                     name,
                     photoURL,
                     email,
+                    userId:user?.uid,
                     userType: utype
                 };
 
