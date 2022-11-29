@@ -9,9 +9,11 @@ const BuyerRoutes = ({children}) => {
     const location =useLocation();
     
   
-console.log(user)
+
  const [users,isusers]=useSeller(user?.email)
- console.log(users)
+ console.log(users.userType==='buyer')
+ const buyer= users?.userType==="buyer"
+ console.log(buyer)
 
    
 
@@ -20,7 +22,7 @@ console.log(user)
     if(loading  || isusers){
         return <p>Loading ....................</p>
     }
-    if (user?.uid && users && users?.userType==="buyer" ){
+    if (user?.uid && buyer ){
         return children
 
     }

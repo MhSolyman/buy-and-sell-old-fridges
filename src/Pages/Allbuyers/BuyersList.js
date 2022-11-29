@@ -1,13 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query'
 
 const BuyersList = () => {
-    const [buyers, setBuyers] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/buyers')
-            .then((response) => response.json())
-            .then((data) => setBuyers(data));
+
             
-    }, [])
+
+    const { data: buyers = [], refetch } = useQuery({
+        queryKey: ['buyers'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/buyers');
+            const data = await res.json();
+            return data
+        }
+    })
+
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/Deleteuser/${id}`, {
+            method: 'DELETE',
+        })
+            .then(res => res.json()) // or res.json()
+            .then((data) => {
+                
+
+                    refetch()
+                
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     return (
         <div>
 
@@ -50,7 +72,7 @@ const BuyersList = () => {
                                 <button className="btn btn-ghost btn-xs">{buyer.userType}</button>
                             </th>
                             <td>
-                            <button className="btn btn-error">DELETE</button>
+                            <button onClick={()=>handleDelete(buyer?._id)} className="btn btn-error">DELETE</button>
                                 
                             </td>
                         </tr>)}

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 const useSeller = email => {
 
 const [isusers,setIsusers] = useState(true)
-    const [users, setUsers] = useState(false)
+    const [users, setUsers] = useState()
 
     useEffect(() => {
         if (email) {

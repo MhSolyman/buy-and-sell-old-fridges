@@ -1,14 +1,54 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query'
 
 
 
 const AllSellers = () => {
-    const [sellers, setSellers] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:5000/seller')
+    const { data: sellers = [], refetch } = useQuery({
+        queryKey: ['sellers'],
+        queryFn: async () => {
+            const res = await fetch('http://localhost:5000/sellers');
+            const data = await res.json();
+            return data
+        }
+    })
+
+
+
+
+    const veryfy = (id) => {
+        fetch(`http://localhost:5000/veryfy/${id}`, {
+            method: 'PUT',
+
+        })
             .then((response) => response.json())
-            .then((data) => setSellers(data));
-    }, [])
+            .then((data) => {
+                if (data.modifiedCount > 0) {
+
+                    refetch()
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/Deleteuser/${id}`, {
+            method: 'DELETE',
+        })
+            .then(res => res.text()) // or res.json()
+            .then((data) => {
+
+
+                refetch()
+
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     return (
         <div>
             All Sellers
@@ -49,14 +89,16 @@ const AllSellers = () => {
                             <th>
                                 <button className="btn btn-ghost btn-xs">{seller.userType}</button>
                             </th>
+
                             <td>
-                                <button className="btn btn-info btn-md">Veryfication</button>
+                                {seller?.veryfy !== 'veryfy' && <button onClick={() => veryfy(seller?._id)} className="btn btn-info btn-md">Veryfication</button>}
 
                             </td>
 
 
+
                             <td>
-                                <button className="btn btn-error">DELETE</button>
+                                <button onClick={() => handleDelete(seller?._id)} className="btn btn-error">DELETE</button>
 
                             </td>
 

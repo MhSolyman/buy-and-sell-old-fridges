@@ -20,7 +20,7 @@ console.log(user)
     if(loading  || isusers){
         return <p>Loading ....................</p>
     }
-    if (user?.uid && users && users?.userType==="seller" ){
+    if (user?.uid && users?.userType==="seller" ){
         return children
 
     }
