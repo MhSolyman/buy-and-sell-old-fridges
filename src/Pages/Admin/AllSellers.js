@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 
 const AllSellers = () => {
     const [sellers, setSellers] = useState([]);
-    console.log(sellers)
     useEffect(() => {
         fetch('http://localhost:5000/seller')
             .then((response) => response.json())
@@ -21,14 +20,15 @@ const AllSellers = () => {
                             <th>
                                 img
                             </th>
-                            <th>category</th>
-                            <th>products name</th>
-                            <th>post date</th>
-                            <th></th>
+                            <th>name</th>
+                            <th>email</th>
+                            <th>type</th>
+                            <th>Veryfy</th>
+                            <th>action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {sellers.map(seller => <tr>
+                        {sellers.map(seller => <tr key={seller._id}>
 
                             <td>
                                 <div className="flex items-center space-x-3">
@@ -49,6 +49,19 @@ const AllSellers = () => {
                             <th>
                                 <button className="btn btn-ghost btn-xs">{seller.userType}</button>
                             </th>
+                            <td>
+                                <button className="btn btn-info btn-md">Veryfication</button>
+
+                            </td>
+
+
+                            <td>
+                                <button className="btn btn-error">DELETE</button>
+
+                            </td>
+
+
+
                         </tr>)}
 
 

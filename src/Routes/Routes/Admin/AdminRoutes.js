@@ -9,9 +9,9 @@ const AdminRoutes = ({children}) => {
     const location =useLocation();
     
   
-console.log(user)
+
  const [users,isusers]=useSeller(user?.email)
- console.log(users)
+
 
    
 
