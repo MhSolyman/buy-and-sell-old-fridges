@@ -1,19 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext} from 'react';
+import { useQuery } from '@tanstack/react-query'
+
 
 import { AuthContext } from '../../Contects/UserContexts';
 import swal from 'sweetalert';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
-    const [products,setProducts]=useState([])
-    products.map(p=>console.log(p))
-    console.log(products)
-    useEffect(() => {
-        fetch(`http://localhost:5000/products/${user?.email}`)
-        .then((response) => response.json())
-        .then((data) => setProducts(data));
+  
 
-      }, [user?.email]);
+
+    const { data: products = [], refetch } = useQuery({
+        queryKey: ['products'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/products/${user?.email}`);
+            const data = await res.json();
+            return data
+        }
+    })
+
+
+
+
+
       
     const advatize = (id) => {
         fetch(`http://localhost:5000/advatize/${id}`, {
@@ -23,6 +32,27 @@ const MyProducts = () => {
             .then((response) => response.json())
             .then((data) => {
                 swal("weldone");
+                refetch()
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+
+
+
+
+    const handleDelete = (id) => {
+        fetch(`http://localhost:5000/DeleteMyprodut/${id}`, {
+            method: 'DELETE',
+        })
+            .then(res => res.json()) // or res.json()
+            .then((data) => {
+               refetch() 
+
+                   
+                
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -76,7 +106,7 @@ const MyProducts = () => {
                                 
                             </td>
                             <td>
-                                <button className="btn btn-error" onClick={()=>advatize(product?._id)}>Delete</button>
+                                <button className="btn btn-error" onClick={()=>handleDelete(product?._id)}>Delete</button>
                             </td>
                         </tr>)}
                         
