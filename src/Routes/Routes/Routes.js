@@ -18,6 +18,8 @@ import BuyerRoutes from "./Buyer/BuyerRoutes";
 import PrivateRoutes from "./Private/PrivateRoutes";
 import AdminRoutes from "./Admin/AdminRoutes";
 import ModalType from "../../Pages/Home/Product/ModalType";
+import Blog from "../../Pages/Home/Home/Blog/Blog";
+import Error from "../../Pages/Home/Home/Error/Error";
 
 const router = createBrowserRouter([
     {
@@ -77,12 +79,20 @@ const router = createBrowserRouter([
         {
             path:'/Myorder',
             element:<BuyerRoutes><Myorder></Myorder></BuyerRoutes>
+        },
+        {
+            path:'/blog',
+            element:<Blog></Blog>
         }
         
 
 
         ]
-    }
+    },
+    {
+        path:"*",
+        element:<Error></Error>
+      }
 ])
 
 export default router
