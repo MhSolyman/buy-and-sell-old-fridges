@@ -15,7 +15,7 @@ const Products = ({ d }) => {
     }, [d?.email])
 
 
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -66,6 +66,9 @@ const Products = ({ d }) => {
 
 
 
+                    <p><b>
+                        conditionType:
+                    </b> {d?.conditionType}</p>
                     <p>Resele price: {d.resalePrice}</p>
                     <p> <b> Post time:   </b> {d.postDate}</p>
 

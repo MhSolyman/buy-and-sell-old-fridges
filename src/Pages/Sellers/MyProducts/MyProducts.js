@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
+
 import { AuthContext } from '../../Contects/UserContexts';
+import swal from 'sweetalert';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext)
@@ -12,6 +14,20 @@ const MyProducts = () => {
         .then((data) => setProducts(data));
 
       }, [user?.email]);
+      
+    const advatize = (id) => {
+        fetch(`http://localhost:5000/advatize/${id}`, {
+            method: 'PUT',
+
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                swal("weldone");
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
  
     return (
         <div>
@@ -27,7 +43,9 @@ const MyProducts = () => {
                             <th>category</th>
                             <th>products name</th>
                             <th>post date</th>
-                            <th></th>
+                            <th>price</th>
+                            <th>Advatize</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +70,14 @@ const MyProducts = () => {
                             <th>
                                 <button className="btn btn-ghost btn-xs">{product.postDate}</button>
                             </th>
+                            <td>{product.originalPrice}</td>
+                            <td>
+                                {product?.advatize !=='advatize' && <button className="btn btn-primary" onClick={()=>advatize(product?._id)}>advatize</button>}
+                                
+                            </td>
+                            <td>
+                                <button className="btn btn-error" onClick={()=>advatize(product?._id)}>Delete</button>
+                            </td>
                         </tr>)}
                         
 

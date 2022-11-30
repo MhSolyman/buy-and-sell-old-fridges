@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Catagory from '../Catagory/Catagory';
+import Advatizeitem from './Advatizeitem/Advatizeitem';
 
 import './catagory.css'
 const Home = () => {
     const catagoris = useLoaderData();
+
+    const [additems,setAdditems] = useState([])
+    console.log(additems)
+    useEffect(()=>{
+        fetch('http://localhost:5000/allproduct')
+  .then((response) => response.json())
+  .then((data) => setAdditems(data));
+
+    },[])
 
 
 
@@ -12,11 +22,7 @@ const Home = () => {
         <div >
             Home
 
-            <div className="grid grid-flow-col auto-cols-max">
-                <div>01</div>
-                <div>02</div>
-                <div>03</div>
-            </div>
+            
 
 
             <div className='grd'>
@@ -26,6 +32,15 @@ const Home = () => {
                         catagory={catagory}
                     ></Catagory>)
                 }
+            </div>
+            <div>
+                <h6>Advatize Item</h6>
+                <div className='grd'>
+                {
+                    additems.map(additem=><Advatizeitem key={additem._id} additem={additem}></Advatizeitem>)
+                }
+                </div>
+
             </div>
 
 
