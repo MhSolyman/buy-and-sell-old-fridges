@@ -6,6 +6,8 @@ const [isusers,setIsusers] = useState(true)
     const [users, setUsers] = useState()
 
     useEffect(() => {
+        console.log(email)
+
         if (email) {
 
 
@@ -18,6 +20,7 @@ const [isusers,setIsusers] = useState(true)
         }
     }, [email]);
     return [users,isusers]
+
 
 
 

@@ -11,9 +11,7 @@ const BuyerRoutes = ({children}) => {
   
 
  const [users,isusers]=useSeller(user?.email)
- console.log(users.userType==='buyer')
- const buyer= users?.userType==="buyer"
- console.log(buyer)
+
 
    
 
@@ -22,7 +20,7 @@ const BuyerRoutes = ({children}) => {
     if(loading  || isusers){
         return <p>Loading ....................</p>
     }
-    if (user?.uid && buyer ){
+    if (user?.uid && users?.userType==="buyer" ){
         return children
 
     }

@@ -5,10 +5,10 @@ import Products from './Products';
 const Product = () => {
     const data = useLoaderData();
 
-    console.log(data)
+
     return (
 
-        <div>
+        <div className='grd'>
            
             {data.map(d=>( <Products key={d._id}
                 d={d}></Products>))

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contects/UserContexts';
 
 const Login = () => {
-    const { signIn, signInWithGoogle } = useContext(AuthContext)
+    const { signIn, signInWithGoogle ,setLoading} = useContext(AuthContext)
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -23,6 +23,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user);
+                setLoading(false)
                 form.reset()
                 navigate(from,{replace:true})
             })
@@ -34,6 +35,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                
                 navigate(from,{replace:true})
             })
             .catch(err => console.log(err))

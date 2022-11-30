@@ -52,7 +52,7 @@ const UserContexts = ({ children }) => {
 
 
 
-    const authInfo = {updateUserProfile, loading,signInWithGoogle, logOut, user, createUser, signIn }
+    const authInfo = {updateUserProfile, loading,signInWithGoogle, logOut, user, createUser, signIn, }
 
     return (
         <AuthContext.Provider value={authInfo}>

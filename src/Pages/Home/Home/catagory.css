@@ -1,0 +1,11 @@
+
+  @media screen and (min-width: 600px) {
+    .grd {
+      display: grid;
+      grid-template-columns: repeat(3, 25%);
+      grid-column-gap: 5%;
+     margin-top: 5%;
+     margin-left: 5%;
+    }
+  }
+ 

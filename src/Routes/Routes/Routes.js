@@ -17,6 +17,7 @@ import SellerRoutes from "./Seller/SellerRoutes";
 import BuyerRoutes from "./Buyer/BuyerRoutes";
 import PrivateRoutes from "./Private/PrivateRoutes";
 import AdminRoutes from "./Admin/AdminRoutes";
+import ModalType from "../../Pages/Home/Product/ModalType";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +33,11 @@ const router = createBrowserRouter([
             loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
 
             element: <PrivateRoutes><Product></Product></PrivateRoutes>
+        },{
+            path:'/modal/:id',
+            loader: ({ params }) => fetch(`http://localhost:5000/oneproduct/${params.id}`),
+            element:<ModalType></ModalType>
+
         },
         {
             path: '/login',
