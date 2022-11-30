@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Contects/UserContexts';
 
 const ModalType = () => {
     const data=useLoaderData()
-    const [user,setUser] = useState() 
+    console.log(data)
+    const {user} = useContext(AuthContext)
     console.log(user)
+    const [users,setUser] = useState() 
+    console.log(users)
     useEffect(()=>
     {
         fetch(`http://localhost:5000/users/${data?.email}`)
@@ -13,9 +17,18 @@ const ModalType = () => {
     },[data?.email])
    
     console.log(data.email)
+
+
+
+
+
+
+
     return (
         <div>
-            
+
+
+
             
         </div>
     );

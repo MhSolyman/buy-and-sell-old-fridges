@@ -12,7 +12,7 @@ const Home = () => {
         <div >
             Home
 
-            <div class="grid grid-flow-col auto-cols-max">
+            <div className="grid grid-flow-col auto-cols-max">
                 <div>01</div>
                 <div>02</div>
                 <div>03</div>

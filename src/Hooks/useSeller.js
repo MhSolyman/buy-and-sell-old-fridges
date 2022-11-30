@@ -6,11 +6,9 @@ const [isusers,setIsusers] = useState(true)
     const [users, setUsers] = useState()
 
     useEffect(() => {
-        console.log(email)
+        
 
         if (email) {
-
-
             fetch(`http://localhost:5000/users/${email}`)
                 .then((response) => response.json())
                 .then((data) => {setUsers(data)

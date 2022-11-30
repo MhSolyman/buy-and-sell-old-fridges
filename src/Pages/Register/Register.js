@@ -3,12 +3,12 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contects/UserContexts';
 
 const Register = () => {
-  
+
 
     const [utype, setUtype] = useState('buyer');
     console.log(utype)
-    const { updateUserProfile, createUser, signInWithGoogle,user } = useContext(AuthContext)
- 
+    const { updateUserProfile, createUser, signInWithGoogle, user } = useContext(AuthContext)
+
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -29,7 +29,7 @@ const Register = () => {
 
 
 
-        createUser(email, password,user)
+        createUser(email, password, user)
             .then(result => {
                 const user = result.user;
                 console.log(user)
@@ -41,7 +41,7 @@ const Register = () => {
                     name,
                     photoURL,
                     email,
-                    userId:user?.uid,
+                    userId: user?.uid,
                     userType: utype
                 };
 
@@ -85,6 +85,32 @@ const Register = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
+                const data = {
+                    name: user?.displayName,
+                    photoURL: user.photoURL,
+                    email: user?.email,
+                    userId: user?.uid,
+                    userType: utype
+                };
+
+                fetch('http://localhost:5000/users', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+
+
+
 
                 navigate(from, { replace: true })
             })
@@ -131,7 +157,7 @@ const Register = () => {
                             </div>
 
                             <select onChange={e => setUtype(e.target.value)}>
-                             
+
                                 <option value={null}>buyer</option>
                                 <option value="seller">seller</option>
 

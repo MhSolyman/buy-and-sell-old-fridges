@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../Contects/UserContexts';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 
 const Addproduct = () => {
+    const navigate = useNavigate()
 
   const {user} =useContext(AuthContext)
     const handleSubmit = event => {
@@ -51,6 +54,8 @@ const Addproduct = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
+                swal("Good job!", "You clicked the button!", "success");
+                navigate('/MyProducts')
             })
             .catch((error) => {
                 console.error('Error:', error);

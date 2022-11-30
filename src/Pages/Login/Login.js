@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext} from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contects/UserContexts';
 
 const Login = () => {
-    const { signIn, signInWithGoogle ,setLoading} = useContext(AuthContext)
+    const { signIn, signInWithGoogle } = useContext(AuthContext)
+
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -23,9 +24,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user);
-                setLoading(false)
                 form.reset()
-                navigate(from,{replace:true})
+                navigate(from, { replace: true })
             })
             .catch(err => console.log(err))
 
@@ -35,8 +35,32 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user)
-                
-                navigate(from,{replace:true})
+
+                const data = {
+                    name: user?.displayName,
+                    photoURL: user.photoURL,
+                    email: user?.email,
+                    userId: user?.uid,
+                    userType: 'buyer'
+                };
+
+                fetch('http://localhost:5000/users', {
+                    method: 'POST', // or 'PUT'
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log('Success:', data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+
+                navigate(from, { replace: true })
             })
             .catch(err => console.log(err))
     }
@@ -76,9 +100,9 @@ const Login = () => {
                 </div>
 
             </div>
-            
-                <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary" >Login With Google</button>
-            
+
+            <button onClick={handleGoogleSignIn} className="btn btn-outline btn-primary" >Login With Google</button>
+
 
 
 

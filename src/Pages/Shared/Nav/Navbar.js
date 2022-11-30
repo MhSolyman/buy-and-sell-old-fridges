@@ -8,6 +8,7 @@ const Navbar = () => {
     const [users, setUsers] = useState('')
 
     const { user, logOut } = useContext(AuthContext)
+    console.log(user)
     //   const { data: users = {} } = useQuery({
     //     queryKey: ['users'],
     //   queryFn: async () => {
