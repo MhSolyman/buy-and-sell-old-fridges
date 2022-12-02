@@ -17,7 +17,7 @@ import SellerRoutes from "./Seller/SellerRoutes";
 import BuyerRoutes from "./Buyer/BuyerRoutes";
 import PrivateRoutes from "./Private/PrivateRoutes";
 import AdminRoutes from "./Admin/AdminRoutes";
-import ModalType from "../../Pages/Home/Product/ModalType";
+
 import Blog from "../../Pages/Home/Home/Blog/Blog";
 import Error from "../../Pages/Home/Home/Error/Error";
 
@@ -27,19 +27,14 @@ const router = createBrowserRouter([
         element: <Main></Main>,
         children: [{
             path: '/',
-            loader: () => fetch('http://localhost:5000/categories'),
+            loader: () => fetch('https://y-hay6nry43-mhsolyman.vercel.app/categories'),
             element: <Home></Home>
         },
         {
             path: '/category/:id',
-            loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+            loader: ({ params }) => fetch(`https://y-hay6nry43-mhsolyman.vercel.app/category/${params.id}`),
 
             element: <PrivateRoutes><Product></Product></PrivateRoutes>
-        },{
-            path:'/modal/:id',
-            loader: ({ params }) => fetch(`http://localhost:5000/oneproduct/${params.id}`),
-            element:<ModalType></ModalType>
-
         },
         {
             path: '/login',
@@ -83,6 +78,10 @@ const router = createBrowserRouter([
         {
             path:'/blog',
             element:<Blog></Blog>
+        },
+        {
+            path:'/report',
+            eliment:<ReportedItems></ReportedItems>
         }
         
 

@@ -28,6 +28,7 @@ const UserContexts = ({ children }) => {
     }
     const logOut = () => {
         setLoading(true)
+        localStorage.removeItem('token-set')
         return signOut(auth);
     }
     const signInWithGoogle = () => {

@@ -45,7 +45,7 @@ const Register = () => {
                     userType: utype
                 };
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://y-hay6nry43-mhsolyman.vercel.app/users', {
                     method: 'POST', // or 'PUT'
                     headers: {
                         'Content-Type': 'application/json',
@@ -54,6 +54,7 @@ const Register = () => {
                 })
                     .then((response) => response.json())
                     .then((data) => {
+                        getUserToken(email)
                         console.log('Success:', data);
                     })
                     .catch((error) => {
@@ -64,12 +65,23 @@ const Register = () => {
 
 
 
-                navigate(from, { replace: true })
 
 
             })
             .catch(err => console.log(err))
     }
+
+
+
+
+
+
+
+
+
+
+
+
     const handleUpdateUserProfile = (name, photoURL) => {
         const profile = {
             displayName: name,
@@ -93,7 +105,7 @@ const Register = () => {
                     userType: utype
                 };
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://y-hay6nry43-mhsolyman.vercel.app/users', {
                     method: 'POST', // or 'PUT'
                     headers: {
                         'Content-Type': 'application/json',
@@ -103,18 +115,34 @@ const Register = () => {
                     .then((response) => response.json())
                     .then((data) => {
                         console.log('Success:', data);
+                       
+                       
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
+                    getUserToken(user?.email)
+                   
 
-
-
-
-
-                navigate(from, { replace: true })
+ 
             })
             .catch(err => console.log(err))
+    }
+
+
+
+    
+    const getUserToken = email => {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('accessToken', data.accessToken)
+                    navigate(from, { replace: true })
+
+                }
+            })
+
     }
 
 

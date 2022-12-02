@@ -44,7 +44,7 @@ const Addproduct = () => {
 
         };
 
-        fetch('http://localhost:5000/product', {
+        fetch('https://y-hay6nry43-mhsolyman.vercel.app/product', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -7,7 +7,7 @@ const AllSellers = () => {
     const { data: sellers = [], refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/sellers');
+            const res = await fetch('https://y-hay6nry43-mhsolyman.vercel.app/sellers');
             const data = await res.json();
             return data
         }
@@ -17,7 +17,7 @@ const AllSellers = () => {
 
 
     const veryfy = (id) => {
-        fetch(`http://localhost:5000/veryfy/${id}`, {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/veryfy/${id}`, {
             method: 'PUT',
 
         })
@@ -35,7 +35,7 @@ const AllSellers = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/Deleteuser/${id}`, {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/Deleteuser/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.text()) // or res.json()

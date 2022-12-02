@@ -13,7 +13,7 @@ const MyProducts = () => {
     const { data: products = [], refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products/${user?.email}`);
+            const res = await fetch(`https://y-hay6nry43-mhsolyman.vercel.app/products/${user?.email}`);
             const data = await res.json();
             return data
         }
@@ -25,7 +25,7 @@ const MyProducts = () => {
 
       
     const advatize = (id) => {
-        fetch(`http://localhost:5000/advatize/${id}`, {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/advatize/${id}`, {
             method: 'PUT',
 
         })
@@ -44,7 +44,7 @@ const MyProducts = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/DeleteMyprodut/${id}`, {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/DeleteMyprodut/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json()) // or res.json()

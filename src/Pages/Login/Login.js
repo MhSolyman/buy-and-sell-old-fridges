@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contects/UserContexts';
 
 const Login = () => {
-    const { signIn, signInWithGoogle } = useContext(AuthContext)
+    const { user,signIn, signInWithGoogle } = useContext(AuthContext)
 
 
     const navigate = useNavigate()
@@ -25,13 +25,18 @@ const Login = () => {
                 const user = result.user
                 console.log(user);
                 form.reset()
-                navigate(from, { replace: true })
+                getUserToken(email)
+               
             })
             .catch(err => console.log(err))
 
     }
+
+
+
     const handleGoogleSignIn = () => {
-        signInWithGoogle()
+       
+        signInWithGoogle(user)
             .then(result => {
                 const user = result.user;
                 console.log(user)
@@ -44,7 +49,7 @@ const Login = () => {
                     userType: 'buyer'
                 };
 
-                fetch('http://localhost:5000/users', {
+                fetch('https://y-hay6nry43-mhsolyman.vercel.app/users', {
                     method: 'POST', // or 'PUT'
                     headers: {
                         'Content-Type': 'application/json',
@@ -54,15 +59,34 @@ const Login = () => {
                     .then((response) => response.json())
                     .then((data) => {
                         console.log('Success:', data);
+                        
+                       
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
+                   
+                    getUserToken(user?.email)
 
-
-                navigate(from, { replace: true })
+               
             })
             .catch(err => console.log(err))
+           
+    }
+
+
+
+    const getUserToken = email => {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('accessToken', data.accessToken)
+                    navigate(from, { replace: true })
+
+                }
+            })
+
     }
     return (
         <div>

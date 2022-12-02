@@ -8,7 +8,7 @@ const Navbar = () => {
     const [users, setUsers] = useState('')
 
     const { user, logOut } = useContext(AuthContext)
-    console.log(user)
+   
     //   const { data: users = {} } = useQuery({
     //     queryKey: ['users'],
     //   queryFn: async () => {
@@ -21,7 +21,7 @@ const Navbar = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/users/${user?.email}`)
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/users/${user?.email}`)
             .then((response) => response.json())
             .then((data) => setUsers(data));
     }, [user?.email]);
@@ -41,7 +41,8 @@ const Navbar = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                        <li><button className="btn btn-ghost"> <Link to={'/blog'}>Blog</Link> </button></li>
+                        <li><Link to='/'> Home</Link></li>
+                            <li><button className="btn btn-ghost"> <Link to={'/blog'}>Blog</Link> </button></li>
                             <li>{
                                 users?.userType === "admin" && user?.uid ? <Link to={'/allSellers'}><button className="btn btn-ghost"> All Sellers</button></Link> : <> </>
                             }</li>
@@ -81,8 +82,9 @@ const Navbar = () => {
                             users?.userType === "admin" && user?.uid ? <Link to={'/allSellers'}><button className="btn btn-ghost"> All Sellers</button></Link> : <> </>
                         }</li>
                         <li tabIndex={0}>
+                        <li><Link to='/'> Home</Link></li>
 
-                        <li><button className="btn btn-ghost"> <Link to={'/blog'}>Blog</Link> </button></li>
+                            <li><button className="btn btn-ghost"> <Link to={'/blog'}>Blog</Link> </button></li>
 
                             {
                                 users?.userType === "admin" && user?.uid ? <Link to={'/allbuyers'}><button className="btn btn-ghost">  All Buyers </button></Link> : <> </>
@@ -105,6 +107,7 @@ const Navbar = () => {
                         <li> {
                             users?.userType === "buyer" && user?.uid ? <Link to={'/Myorder'}><button className="btn btn-ghost">My orders</button></Link> : <> </>
                         }</li>
+                        
 
                     </ul>
                 </div>

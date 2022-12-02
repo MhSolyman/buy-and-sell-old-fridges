@@ -8,7 +8,11 @@ const BuyersList = () => {
     const { data: buyers = [], refetch } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/buyers');
+            const res = await fetch('https://y-hay6nry43-mhsolyman.vercel.app/buyers',{
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             const data = await res.json();
             return data
         }
@@ -16,7 +20,7 @@ const BuyersList = () => {
 
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/Deleteuser/${id}`, {
+        fetch(`https://y-hay6nry43-mhsolyman.vercel.app/Deleteuser/${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json()) // or res.json()

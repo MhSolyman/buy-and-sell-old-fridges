@@ -9,7 +9,7 @@ const [isusers,setIsusers] = useState(true)
         
 
         if (email) {
-            fetch(`http://localhost:5000/users/${email}`)
+            fetch(`https://y-hay6nry43-mhsolyman.vercel.app/users/${email}`)
                 .then((response) => response.json())
                 .then((data) => {setUsers(data)
                 setIsusers(false)});
