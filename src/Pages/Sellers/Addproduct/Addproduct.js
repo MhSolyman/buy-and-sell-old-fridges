@@ -78,7 +78,7 @@ const Addproduct = () => {
                         <div className="card-body">
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Full name</span>
+                                    <span className="label-text">Catagory</span>
                                 </label>
                                 <input type="text" name="name" placeholder="Full name" className="input input-bordered" required />
                             </div>
