@@ -14,7 +14,7 @@ const Products = ({ d, setD }) => {
     }, [d?.email])
 
     const handleReport = (id) => {
-        fetch(`http://localhost:5000/report/${id}`, {
+        fetch(`https://y-mhsolyman.vercel.app/report/${id}`, {
             method: 'PUT',
 
         })

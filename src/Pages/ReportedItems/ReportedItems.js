@@ -6,7 +6,7 @@ const ReportedItems = () => {
     console.log(report)
     useEffect(() => {
 
-        fetch('http://localhost:5000/report')
+        fetch('https://y-mhsolyman.vercel.app/report')
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
